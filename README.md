@@ -9,11 +9,9 @@
 **Nome do time:** CTRL + ALT + DEL
 
 | Nome | Matrícula | Usuário do GitHub |
-| --- | --- | --- |
+| ---  | --- | --- |
 | Abner Lima Menezes | 2410620 | abnerlime |
-| --- | --- | --- |
 | João Marcelo Barbosa de Freitas | 2405345 | ??? |
-| --- | --- | --- |
 | Rodrigo Fradera | 2404356 | rfradera29 |
 
 
