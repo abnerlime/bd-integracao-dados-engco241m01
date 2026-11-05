@@ -6,12 +6,12 @@
 
 ## Equipe
 
-**Nome do time:** ____________________
+**Nome do time:** Los 3 maiores
 
 | Nome | Matrícula | Usuário do GitHub |
-| --- | --- | --- |
-|  |  |  |
-|  |  |  |
+| Abner Lima Menezes | 2410620 | abnerlime |
+| João Marcelo Barbosa de Freitas | 2405345 | ??? |
+| Rodrigo Fradera | 2404356 | rfradera29 |
 |  |  |  |
 |  |  |  |
 |  |  |  |
