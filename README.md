@@ -11,7 +11,7 @@
 | Nome | Matrícula | Usuário do GitHub |
 | ---  | --- | --- |
 | Abner Lima Menezes | 2410620 | abnerlime |
-| João Marcelo Barbosa de Freitas | 2405345 | ??? |
+| João Marcelo Barbosa de Freitas | 2405345 | imjoaomarcelo |
 | Rodrigo Fradera | 2404356 | rfradera29 |
 
 
