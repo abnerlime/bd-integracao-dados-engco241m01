@@ -1,5 +1,6 @@
 import pandas as pd
 import psycopg2
+import os
 from datetime import datetime, timedelta
 
 # ── Configurações ──────────────────────────────────────────
@@ -14,12 +15,17 @@ DB = {
 
 # ── Converte serial do Excel para data ─────────────────────
 def excel_para_data(valor):
-    try:
-        if pd.isna(valor):
-            return None
-        return (datetime(1899, 12, 30) + timedelta(days=int(valor))).date()
-    except:
+    if pd.isna(valor):
         return None
+    if isinstance(valor, datetime):
+        return valor.date()
+    try:
+        return (datetime(1899, 12, 30) + timedelta(days=int(float(valor)))).date()
+    except:
+        try:
+            return pd.to_datetime(valor, dayfirst=True).date()
+        except:
+            return None
 
 # ── Conecta no banco ───────────────────────────────────────
 print("Conectando no PostgreSQL...")

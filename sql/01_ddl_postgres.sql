@@ -42,7 +42,7 @@ CREATE TABLE public.entradas_mercadoria (
  filial_id int4 NULL,
  custo_unitario numeric(12, 4) DEFAULT 0 NOT NULL,
  CONSTRAINT entradas_mercadoria_pkey PRIMARY KEY (item, produto_id, nro_nfe)
-	-- Removi a coluna "Ordem Compra" mencionada na PK composta pois ela não existe na tabela. 
+	-- Adicionei a coluna ordem_compra pois na coluna da planilha há ess 
  );
  
 CREATE TABLE public.produtos_filial (
@@ -50,11 +50,12 @@ CREATE TABLE public.produtos_filial (
  produto_id varchar(255) NOT NULL,
  decricao varchar(255) NOT NULL,
  estoque float8 DEFAULT 0 NOT NULL,
- preco_unitario float8 DEFAULT '0' NOT NULL,
- preco_compra float8 DEFAULT '0' NOT NULL,
- preco_venda float8 DEFAULT '0' NOT NULL,
+ preco_unitario float8 DEFAULT 0 NOT NULL,
+ preco_compra float8 DEFAULT 0 NOT NULL,
+ preco_venda float8 DEFAULT 0 NOT NULL,
  idfonecedor int4 NULL,
 CONSTRAINT produtos_filial_pkey PRIMARY KEY (filial_id, produto_id)
+	-- Em algumas colunas o comando default estava sendo usando de forma incorreta. Estava '0' ao inves de usar apenas o numeral 0. 
 	-- A penúltima linha não possuía vírgula para separar os itens.
 	/*A coluna mencionada na PK estava com um nome diferente da 
 	coluna existente na tabela ( Estava idproduto ao invés de produto_id.*/ 
@@ -66,3 +67,23 @@ razao_social varchar(255) NOT NULL,
 CONSTRAINT fornecedor_pkey PRIMARY KEY (idforncedor)
 	-- Removi uma das colunas mencionadas na PK (idproduto) não existe na tabela. 
 );
+
+-- Alguns erros só notei depois, então tive que usar comandos especificos para alterar estruturas.
+
+ALTER TABLE public.fornecedor RENAME COLUMN idforncedor TO idfornecedor;
+
+ALTER TABLE public.produtos_filial RENAME COLUMN decricao TO descricao;
+ALTER TABLE public.produtos_filial RENAME COLUMN idfonecedor TO idfornecedor;
+ALTER TABLE public.entradas_mercadoria ADD COLUMN ordem_compra float8 DEFAULT 0 NOT NULL;
+
+-- Precisei excluir a constraint antiga que continha apenas 3 colunas na PK, para não conflitar com a nova.
+ALTER TABLE public.entradas_mercadoria DROP CONSTRAINT entradas_mercadoria_pkey;
+
+-- Adicionei a coluna ordem compra pois era necessário para a PK.
+ALTER TABLE public.entradas_mercadoria ADD CONSTRAINT entradas_mercadoria_pkey PRIMARY KEY (ordem_compra, item, produto_id, nro_nfe);
+
+-- Alterei o tipo de dado da coluna para não dar conflito com o tipo contido na planilha.
+ALTER TABLE public.produtos_filial ALTER COLUMN idfornecedor TYPE varchar(25);
+
+-- Conferindo a quantidade de linhas 
+select count (*) from public.venda;
