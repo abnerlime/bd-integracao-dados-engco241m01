@@ -85,5 +85,6 @@ ALTER TABLE public.entradas_mercadoria ADD CONSTRAINT entradas_mercadoria_pkey P
 -- Alterei o tipo de dado da coluna para não dar conflito com o tipo contido na planilha.
 ALTER TABLE public.produtos_filial ALTER COLUMN idfornecedor TYPE varchar(25);
 
--- Conferindo a quantidade de linhas 
-select count (*) from public.venda;
+-- Alterei o nome da coluna para ficar de acordo com a coluna da tabela fornecedor.
+ALTER TABLE public.pedido_compra RENAME COLUMN fornecedor_id TO idfornecedor;
+
