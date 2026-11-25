@@ -17,7 +17,7 @@ CREATE TABLE public.venda (
 
  
 CREATE TABLE public.pedido_compra (
- pedido_id float8 DEFAULT 0 NOT NULL,
+ pedido_id float8 DEFAULT 0 NOT NULL, -- foi alterado para int4
  data_pedido date NULL, item float8 DEFAULT 0 NOT NULL,
  produto_id varchar(25) DEFAULT '0' NOT NULL,
  descricao_produto varchar(255) NULL,
@@ -93,3 +93,6 @@ ALTER TABLE public.pedido_compra ALTER COLUMN pedido_id TYPE int4;
 
 -- Alterei o tipo de dados da coluna idfornecedor em pedido_compra
 ALTER TABLE public.pedido_compra ALTER COLUMN idfornecedor TYPE varchar(25);
+
+-- Para alterar o tipo de dado da coluna item na tabela entradas_mercadoria
+ALTER TABLE public.entradas_mercadoria ALTER COLUMN item TYPE int4;
