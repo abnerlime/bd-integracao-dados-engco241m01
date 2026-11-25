@@ -28,7 +28,7 @@ CREATE TABLE public.pedido_compra (
  qtde_entregue float8 DEFAULT 0 NOT NULL,
  qtde_pendente float8 DEFAULT 0 NOT NULL,
  preco_compra float8 DEFAULT 0 NULL,
- fornecedor_id int4 DEFAULT 0 NULL,
+ fornecedor_id int4 DEFAULT 0 NULL, -- JÁ FOI ALTERADO PARA IDFORNECEDOR
  CONSTRAINT pedido_compra_pkey PRIMARY KEY (pedido_id , produto_id, item)
  );
  
@@ -47,7 +47,7 @@ CREATE TABLE public.entradas_mercadoria (
  
 CREATE TABLE public.produtos_filial (
  filial_id int4 NULL,
- produto_id varchar(255) NOT NULL,
+ produto_id varchar(255) NOT NULL, -- Alterei o nome para idproduto
  decricao varchar(255) NOT NULL,
  estoque float8 DEFAULT 0 NOT NULL,
  preco_unitario float8 DEFAULT 0 NOT NULL,
@@ -88,3 +88,8 @@ ALTER TABLE public.produtos_filial ALTER COLUMN idfornecedor TYPE varchar(25);
 -- Alterei o nome da coluna para ficar de acordo com a coluna da tabela fornecedor.
 ALTER TABLE public.pedido_compra RENAME COLUMN fornecedor_id TO idfornecedor;
 
+-- Mudei o tipo de dado da coluna pedido_id
+ALTER TABLE public.pedido_compra ALTER COLUMN pedido_id TYPE int4;
+
+-- Alterei o tipo de dados da coluna idfornecedor em pedido_compra
+ALTER TABLE public.pedido_compra ALTER COLUMN idfornecedor TYPE varchar(25);

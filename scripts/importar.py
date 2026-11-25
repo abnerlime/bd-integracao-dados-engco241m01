@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 ARQUIVO = "C:\\Users\\Abner\\bd-integracao-dados-engco241m01\\dados\\base_teste.xlsx"  #trocar caminho do dataset dos Senhores
 DB = {
     "host": "localhost", #de acordo com o host do SGBD dos Senhores
-    "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3006
+    "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3306
     "database": "Varejao Jutai", #nome da data base do Senhores
     "user": "postgres",   #utilizador dos senhores 
     "password": "086429"   #senha do utilizador
