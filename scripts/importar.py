@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 ARQUIVO = "C:\\Users\\Abner\\bd-integracao-dados-engco241m01\\dados\\base_teste.xlsx"  #trocar caminho do dataset dos Senhores
 DB = {
     "host": "localhost", #de acordo com o host do SGBD dos Senhores
-    "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3306
+    "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3006
     "database": "Varejao Jutai", #nome da data base do Senhores
     "user": "postgres",   #utilizador dos senhores 
     "password": "086429"   #senha do utilizador
@@ -102,7 +102,7 @@ df.columns = df.columns.str.strip()
 df = df.iloc[:, :12]
 df.columns = ["pedido_id","data_pedido","item","produto_id","descricao_produto",
               "ordem_compra","qtde_pedida","filial_id","data_entrega",
-              "qtde_entregue","preco_compra","fornecedor_id"]
+              "qtde_entregue","preco_compra","idfornecedor"]
 
 inseridos = 0
 for _, row in df.iterrows():
@@ -111,7 +111,7 @@ for _, row in df.iterrows():
             INSERT INTO public.pedido_compra
                 (pedido_id, data_pedido, item, produto_id, descricao_produto,
                  ordem_compra, qtde_pedida, filial_id, data_entrega,
-                 qtde_entregue, qtde_pendente, preco_compra, fornecedor_id)
+                 qtde_entregue, qtde_pendente, preco_compra, idfornecedor)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (pedido_id, produto_id, item) DO NOTHING
         """, (
@@ -128,7 +128,7 @@ for _, row in df.iterrows():
             float(row["qtde_pedida"]) - float(row["qtde_entregue"])
                 if pd.notna(row["qtde_pedida"]) and pd.notna(row["qtde_entregue"]) else 0,
             float(row["preco_compra"]) if pd.notna(row["preco_compra"]) else 0,
-            int(row["fornecedor_id"]) if pd.notna(row["fornecedor_id"]) else None
+            str(row["idfornecedor"]).strip() if pd.notna(row["idfornecedor"]) else None
         ))
         inseridos += 1
     except Exception as e:
