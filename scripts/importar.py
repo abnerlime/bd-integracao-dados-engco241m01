@@ -2,6 +2,9 @@ import pandas as pd
 import psycopg2
 import os
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ── Configurações ──────────────────────────────────────────
 ARQUIVO = "C:\\Users\\Abner\\bd-integracao-dados-engco241m01\\dados\\base_teste.xlsx"  #trocar caminho do dataset dos Senhores
@@ -10,7 +13,7 @@ DB = {
     "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3006
     "database": "Varejao Jutai", #nome da data base do Senhores
     "user": "postgres",   #utilizador dos senhores 
-    "password": "086429"   #senha do utilizador
+    "password": os.getenv("DB_PASSWORD")   #senha do utilizador
 }
 
 # ── Converte serial do Excel para data ─────────────────────
